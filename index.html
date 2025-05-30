@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanStep | Премиальные кроссовки</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #f5f5f5;
+            --accent: #ff3e6c;
+            --light-gray: #e0e0e0;
+            --dark-gray: #333;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            background: linear-gradient(to right, #ffffff 50%, #f0f0f0 50%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 100%;
+        }
+
+        .sneaker {
+            width: 600px;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: rotate(-15deg);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover .sneaker {
+            transform: rotate(-10deg) translateY(-20px);
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 62, 108, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 20px rgba(255, 62, 108, 0.4);
+        }
+
+        .features {
+            padding: 6rem 10%;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 2.5rem 2rem;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-desc {
+            color: var(--dark-gray);
+        }
+
+        .collection {
+            padding: 6rem 10%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .collection-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .sneakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .sneaker-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sneaker-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .sneaker-img {
+            height: 250px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .sneaker-img img {
+            max-width: 100%;
+            max-height: 200px;
+            transition: transform 0.5s ease;
+        }
+
+        .sneaker-card:hover .sneaker-img img {
+            transform: scale(1.1);
+        }
+
+        .sneaker-info {
+            padding: 1.5rem;
+        }
+
+        .sneaker-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .sneaker-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .sneaker-color {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .color-option {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .color-option:hover, .color-option.active {
+            border-color: var(--dark-gray);
+        }
+
+        .color-black { background: #000; }
+        .color-white { background: #fff; border: 1px solid #eee; }
+        .color-red { background: #ff3e6c; }
+        .color-blue { background: #3e6cff; }
+
+        .sneaker-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .cta {
+            padding: 8rem 10%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1465&q=80') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--accent);
+        }
+
+        .btn-light:hover {
+            background: var(--light-gray);
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 10% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                padding-top: 100px;
+                height: auto;
+            }
+            
+            .hero-content, .hero-image {
+                flex: none;
+                width: 100%;
+                padding: 0;
+            }
+            
+            .hero-content {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+            
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .sneaker {
+                width: 100%;
+                max-width: 500px;
+                height: 350px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">URBAN<span>STEP</span></a>
+        <nav>
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Коллекции</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Измени свой <span>стиль</span> с нашими кроссовками</h1>
+            <p class="subtitle">Эксклюзивные модели, премиальные материалы и непревзойденный комфорт</p>
+            <a href="#" class="btn">Исследовать коллекцию</a>
+        </div>
+        <div class="hero-image">
+            <div class="sneaker"></div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shoe-prints"></i>
+                </div>
+                <h3 class="feature-title">Премиальное качество</h3>
+                <p class="feature-desc">Используем только лучшие материалы для создания кроссовок, которые прослужат вам долгие годы.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="feature-title">Уникальный дизайн</h3>
+                <p class="feature-desc">Наши дизайнеры создают неповторимые модели, которые выделят вас из толпы.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 class="feature-title">Экологичность</h3>
+                <p class="feature-desc">Заботимся о планете, используя переработанные материалы и экологичные технологии производства.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="collection">
+        <h2 class="section-title">Популярные модели</h2>
+        <div class="sneakers-grid">
+            <div class="sneaker-card">
+                <div class="sneaker-badge">Новинка</div>
+                <div class="sneaker-img">
+                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Кроссовки Runner X">
+                </div>
+                <div class="sneaker-info">
+                    <h3 class="sneaker-name">Runner X Pro</h3>
+                    <div class="sneaker-price">9 990 ₽</div>
+                    <div class="sneaker-color">
+                        <div class="color-option color-black active"></div>
+                        <div class="color-option color-white"></div>
+                        <div class="color-option color-red"></div>
+                    </div>
+                    <a href="#" class="btn">Купить сейчас</a>
+                </div>
+            </div>
+            <div class="sneaker-card">
+                <div class="sneaker-badge">Хит продаж</div>
+                <div class="sneaker-img">
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Кроссовки Urban Classic">
+                </div>
+                <div class="sneaker-info">
+                    <h3 class="sneaker-name">Urban Classic</h3>
+                    <div class="sneaker-price">8 490 ₽</div>
+                    <div class="sneaker-color">
+                        <div class="color-option color-white active"></div>
+                        <div class="color-option color-black"></div>
+                        <div class="color-option color-blue"></div>
+                    </div>
+                    <a href="#" class="btn">Купить сейчас</a>
+                </div>
+            </div>
+            <div class="sneaker-card">
+                <div class="sneaker-badge">Ограниченная серия</div>
+                <div class="sneaker-img">
+                    <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" alt="Кроссовки Air Flex">
+                </div>
+                <div class="sneaker-info">
+                    <h3 class="sneaker-name">Air Flex</h3>
+                    <div class="sneaker-price">12 990 ₽</div>
+                    <div class="sneaker-color">
+                        <div class="color-option color-red active"></div>
+                        <div class="color-option color-black"></div>
+                        <div class="color-option color-white"></div>
+                    </div>
+                    <a href="#" class="btn">Купить сейчас</a>
+                </div>
+            </div>
+            <div class="sneaker-card">
+                <div class="sneaker-img">
+                    <img src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80" alt="Кроссовки Trail Master">
+                </div>
+                <div class="sneaker-info">
+                    <h3 class="sneaker-name">Trail Master</h3>
+                    <div class="sneaker-price">10 790 ₽</div>
+                    <div class="sneaker-color">
+                        <div class="color-option color-blue active"></div>
+                        <div class="color-option color-black"></div>
+                        <div class="color-option color-red"></div>
+                    </div>
+                    <a href="#" class="btn">Купить сейчас</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Получите скидку 15% на первую покупку</h2>
+        <p>Подпишитесь на нашу рассылку и будьте первыми, кто узнает о новых коллекциях и специальных предложениях.</p>
+        <a href="#" class="btn btn-light">Подписаться</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>URBAN STEP</h3>
+                <p>Мы создаем кроссовки, которые сочетают в себе стиль, комфорт и инновации. Наша миссия - вдохновлять людей на движение вперед.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Магазин</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Мужские кроссовки</a></li>
+                    <li><a href="#">Женские кроссовки</a></li>
+                    <li><a href="#">Коллекции</a></li>
+                    <li><a href="#">Новинки</a></li>
+                    <li><a href="#">Распродажа</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Поддержка</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Доставка и возврат</a></li>
+                    <li><a href="#">Размеры</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Контакты</a></li>
+                    <li><a href="#">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Тверская, 18</li>
+                    <li><i class="fas fa-phone"></i> +7 (495) 123-45-67</li>
+                    <li><i class="fas fa-envelope"></i> info@urbanstep.ru</li>
+                    <li><i class="fas fa-clock"></i> Пн-Пт: 10:00 - 22:00</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 URBAN STEP. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Простая анимация при прокрутке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация элементов при прокрутке
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.feature-card, .sneaker-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Изменение цвета при наведении на опции цвета
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Удаляем активный класс у всех опций в родительском контейнере
+                    this.parentElement.querySelectorAll('.color-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    // Добавляем активный класс текущей опции
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
